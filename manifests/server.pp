@@ -4,6 +4,5 @@
 include common::basic
 include postgresql::install
 include jenkins::install
-include redis::install
 include mysql::server
 include nodejs::install

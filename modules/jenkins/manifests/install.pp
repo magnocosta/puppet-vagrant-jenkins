@@ -9,7 +9,7 @@ class jenkins::install {
   }
 
   # Create dir to store keys
-  file { "/var/opt/keys":
+  file { "/var/opt/keys_jenkins":
     ensure   => "directory",
     owner    =>  root,
     group    =>  root,
@@ -17,16 +17,16 @@ class jenkins::install {
   }
 
   #Config key
-  file { "/var/opt/keys/jenkins-ci.org.key":
+  file { "/var/opt/keys_jenkins/jenkins-ci.org.key":
     owner    =>  root,
     group    =>  root,
     content  =>  template("jenkins/jenkins-ci.org.key"),
-    require  =>  File["/var/opt/keys"]
+    require  =>  File["/var/opt/keys_jenkins"]
   }
 
   exec {"get-jenkins-key":
-    command => "/usr/bin/apt-key add /var/opt/keys/jenkins-ci.org.key",
-    require => File["/var/opt/keys/jenkins-ci.org.key"]
+    command => "/usr/bin/apt-key add /var/opt/keys_jenkins/jenkins-ci.org.key",
+    require => File["/var/opt/keys_jenkins/jenkins-ci.org.key"]
   }
 
   #Config jenkins repo
